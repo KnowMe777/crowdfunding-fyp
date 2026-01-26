@@ -24,25 +24,25 @@ const CreateCampaign = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(form);
 
-    // validate image URL
-    checkIfImage(form.image, async (exists) => {
-      if (exists) {
-        setIsLoading(true);
-        // await createCampaign({
-        //   ...form,
-        //   target: ethers.utils.parseUnits(form.target, 18),
-        // });
-        await createCampaign(form);
-        setIsLoading(false);
-        navigate("/");
-        console.log(form);
-      } else {
-        alert("Please provide a valid image URL");
+    try {
+      const exists = checkIfImage(form.image);
+
+      if (!exists) {
+        alert("Provide a valid image URL");
         setForm({ ...form, image: "" });
+        setIsLoading(false);
+        return;
       }
-    });
+
+      await createCampaign(form);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      alert("something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

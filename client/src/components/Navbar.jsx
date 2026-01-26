@@ -1,7 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Home, PlusCircle, User, Folder } from "lucide-react";
+import { useStateContext } from "../context";
+import { CustomButton } from "./";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { connectWallet, address } = useStateContext();
+
   return (
     <>
       {/* ================= DESKTOP TOP NAVBAR ================= */}
@@ -43,12 +48,16 @@ const Navbar = () => {
               Profile
             </NavLink>
 
-            <Link
-              to="/create-campaign"
+            <CustomButton
+              btnType="button"
+              title={address ? "New Campaign" : "connect"}
               className="font-poppins bg-black text-white px-8 py-2 rounded-lg hover:opacity-90 transition-transform duration-300 hover:scale-105"
+              handleClick={() => {
+                address ? navigate("create-campaign") : connectWallet();
+              }}
             >
               New Campaign
-            </Link>
+            </CustomButton>
           </div>
         </div>
       </nav>

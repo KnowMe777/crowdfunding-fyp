@@ -53,7 +53,7 @@ contract CrowdFunding {
         campaign.donators.push(msg.sender);
         campaign.donations.push(amount);
 
-        (bool sent, ) = payable(campaign.owner).call{value: amount}("");
+        (bool sent, ) = payable(campaign.owner).call{ value: amount }("");
         if (sent) {
             campaign.collectedAmount = campaign.collectedAmount + amount;
         }
@@ -68,7 +68,7 @@ contract CrowdFunding {
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
 
-        for (uint i = 0; i <= numberOfCampaigns; i++) {
+        for (uint i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
 
             allCampaigns[i] = item;
