@@ -9,6 +9,7 @@ const Hero = () => {
       items-start
       text-left
       bg-[#9ACD32]
+      shadow-lg
     "
     >
       <h1 className="font-montserrat font-bold text-4xl sm:text-7xl">upLift</h1>

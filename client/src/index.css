@@ -9,11 +9,10 @@
 @tailwind utilities;
 
 body {
-  @apply font-inter;
-  @apply font-montserrat;
-  @apply font-outfit;
-  @apply font-poppins;
-  /* @apply font-playfair; */
+  @apply font-montserrat; /* logo */
+  @apply font-poppins; /* headline, buttons */
+  @apply font-inter; /* subheadline, text */
+  @apply font-outfit; /* input labels */
 }
 
 /* h1,
