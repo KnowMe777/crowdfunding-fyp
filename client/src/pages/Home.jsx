@@ -23,9 +23,10 @@ const Home = () => {
     <div className="">
       <Hero />
       <DisplayCampaigns
-        title="All Campaigns"
+        title="Top Campaigns"
         isLoading={isLoading}
-        campaigns={dummyCampaigns.slice(0, 6)}
+        campaigns={campaigns}
+        showViewAll={true}
       />
     </div>
   );

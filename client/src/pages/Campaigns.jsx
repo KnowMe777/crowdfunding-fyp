@@ -1,12 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import DisplayCampaigns from "../components/DisplayCampaigns";
+import { CampaignCardSkeleton } from "../components";
 
 const ITEMS_PER_PAGE = 9;
 
 const Campaigns = ({ campaigns, isLoading }) => {
   const [page, setPage] = useState(1);
 
-  const totalPages = Math.ceil(campaigns.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil((campaigns?.length || 0) / ITEMS_PER_PAGE);
 
   const paginatedCampaigns = useMemo(() => {
     const start = (page - 1) * ITEMS_PER_PAGE;
@@ -14,12 +15,17 @@ const Campaigns = ({ campaigns, isLoading }) => {
     return campaigns.slice(start, end);
   }, [page, campaigns]);
 
+  console.log(" campaigns loading:", isLoading);
+
   return (
     <div className="min-h-screen">
       <DisplayCampaigns
         title="All Campaigns"
         isLoading={isLoading}
         campaigns={paginatedCampaigns}
+        showViewAll={false}
+        skeletonCount={9}
+        totalCount={campaigns.length}
       />
 
       {/* Pagination */}

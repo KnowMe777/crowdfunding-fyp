@@ -9,10 +9,12 @@ import {
   Campaigns,
 } from "./pages";
 import { dummyCampaigns } from "./constants/DummyCampaigns";
+import { useStateContext } from "./context";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
+  const { address, contract, getCampaigns } = useStateContext();
 
   const fetchCampaigns = async () => {
     setIsLoading(true);
@@ -21,16 +23,16 @@ const App = () => {
     setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   if (contract) fetchCampaigns();
-  // }, [address, contract]);
+  useEffect(() => {
+    if (contract) fetchCampaigns();
+  }, [address, contract]);
 
   // Example test with dummy campaigns
-  useEffect(() => {
-    setIsLoading(true);
-    setCampaigns(dummyCampaigns.slice(0, 6));
-    setIsLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setCampaigns(dummyCampaigns);
+  //   setIsLoading(false);
+  // }, []);
 
   return (
     <div className="relative min-h-screen pt-[64px] md:pt-[80px] pb-[64px] bg-white">
