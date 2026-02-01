@@ -50,7 +50,7 @@ const Navbar = () => {
 
             <CustomButton
               btnType="button"
-              title={address ? "New Campaign" : "connect"}
+              title={address ? "New Campaign" : "Connect"}
               className="font-poppins bg-black text-white px-8 py-2 rounded-lg hover:opacity-90 transition-transform duration-300 hover:scale-105"
               handleClick={() => {
                 address ? navigate("create-campaign") : connectWallet();

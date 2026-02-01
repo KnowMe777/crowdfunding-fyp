@@ -1,8 +1,29 @@
 export const daysLeft = (deadline) => {
-  const difference = new Date(deadline).getTime() - Date.now();
-  const remainingDays = difference / (1000 * 3600 * 24);
+  let seconds;
 
-  return remainingDays.toFixed(0);
+  if (deadline instanceof Date) {
+    seconds = Math.floor(deadline.getTime() / 1000);
+  } else if (
+    typeof deadline === "object" &&
+    deadline !== null &&
+    typeof deadline.toString === "function"
+  ) {
+    seconds = Number(deadline.toString());
+  } else if (typeof deadline === "bigint") {
+    seconds = Number(deadline);
+  } else {
+    seconds = Number(deadline);
+  }
+
+  if (seconds > 1e12) {
+    seconds = Math.floor(seconds / 1000);
+  }
+
+  const nowSec = Math.floor(Date.now() / 1000);
+  const diffSec = seconds - nowSec;
+
+  const days = Math.ceil(diffSec / 86400);
+  return String(Math.max(0, days));
 };
 
 export const calculateBarPercentage = (goal, raisedAmount) => {

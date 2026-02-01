@@ -62,7 +62,7 @@ const DisplayCampaigns = ({
           onClick={() => navigate("/campaigns")}
           className="mt-8 sm:mt-10 mx-auto block bg-black text-white px-6 py-3 rounded-xl hover:opacity-90 transition"
         >
-          View all campaigns →
+          View all campaigns
         </button>
       )}
     </section>

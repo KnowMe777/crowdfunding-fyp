@@ -1,86 +1,42 @@
-// import React, { useState, useEffect } from "react";
-// import { useLocation } from "react-router-dom";
-// import { ethers } from "ethers";
-// import { useStateContext } from "../context";
-// import { CustomButton } from "../components";
-// import { calculateBarPercentage, daysLeft } from "../utils";
-
-// const CampaignDetails = () => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const { address, contract, getDonations } = useStateContext;
-//   const [amount, setAmount] = useState("");
-//   const [donators, setDonators] = useState([]);
-//   const state = useLocation;
-//   const remainingDays = daysLeft(state.deadline);
-
-//   return <div>CampaignDetails</div>;
-// };
-
-// export default CampaignDetails;
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-///////////////
-
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useStateContext } from "../context";
 import { CustomButton } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
+import { IoIosArrowBack } from "react-icons/io";
 
 const CampaignDetails = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { state } = useLocation();
   const { id } = useParams();
   const { address, contract, getCampaigns, donate, getDonations } =
     useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [campaign, setCampaign] = useState(location.state || null);
+  const [campaign, setCampaign] = useState(state || null);
   const [donators, setDonators] = useState([]);
   const [amount, setAmount] = useState("");
 
   const remainingDays = campaign ? daysLeft(campaign.deadline) : 0;
 
   const fetchCampaign = async () => {
-    if (!campaign && contract) {
-      try {
-        const allCampaigns = await getCampaigns();
-        const currentCampaign = allCampaigns.find(
-          (c) => String(c.projectId) === String(id),
-        );
-        setCampaign(currentCampaign);
-      } catch (err) {
-        console.error("Error fetching campaigns:", err);
-      }
-    }
+    if (campaign) return;
+    if (!contract) return;
+
+    const allCampaigns = await getCampaigns();
+    const currentCampaign = allCampaigns.find(
+      (c) => String(c.pId) === String(id),
+    );
+
+    setCampaign(currentCampaign);
   };
 
   const fetchDonators = async () => {
     if (campaign && contract) {
       try {
-        const data = await getDonations(campaign.projectId);
+        const data = await getDonations(campaign.pId);
         setDonators(data);
+        console.log(data);
       } catch (err) {
         console.error("Error fetching donators:", err);
       }
@@ -92,20 +48,27 @@ const CampaignDetails = () => {
   }, [contract, id]);
 
   useEffect(() => {
-    fetchDonators();
-  }, [contract, campaign]);
+    if (campaign?.pId !== undefined) {
+      fetchDonators();
+    }
+  }, [contract, campaign?.pId]);
 
   const handleDonate = async () => {
-    if (!campaign || !amount) return;
-    setIsLoading(true);
+    if (!campaign?.pId === undefined) return;
+
+    const amtNum = Number(amount);
+    if (!amtNum || amtNum <= 0) return;
+
     try {
-      await donate(campaign.projectId, amount);
+      setIsLoading(true);
+      await donate(campaign.pId, amount);
       setAmount("");
-      fetchDonators();
-    } catch (error) {
-      console.error(error);
+      await fetchDonators();
+    } catch (err) {
+      console.error("Donate failed:", err);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   if (!campaign)
@@ -116,9 +79,9 @@ const CampaignDetails = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="font-poppins text-sm sm:text-base text-white bg-black p-2 py-5 rounded-xl hover:text-black transition self-start"
+        className="self-start px-1 py-1 rounded-lg text-gray-500 font-medium font-poppins bg-none text-3xl items-start"
       >
-        ← Back
+        <IoIosArrowBack />
       </button>
 
       {/* Campaign Image */}
@@ -130,27 +93,27 @@ const CampaignDetails = () => {
 
       {/* Title & Owner */}
       <div>
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black">
+        <h1 className="font-inter text-xl sm:text-2xl md:text-3xl font-bold text-black">
           {campaign.title}
         </h1>
-        <p className="text-gray-500 text-xs sm:text-sm mt-1">
+        <p className="font-inter text-gray-500 text-xs sm:text-sm mt-1">
           by{" "}
-          <span className="text-black font-medium">
-            {campaign.owner.slice(0, 6)}…
+          <span className="font-inter text-black font-medium">
+            {campaign.owner}
           </span>
         </p>
       </div>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm sm:text-base">
+      <p className="font-inter text-gray-600 text-sm sm:text-base">
         {campaign.description}
       </p>
 
       {/* Progress / Target */}
       <div className="mt-3">
         <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-1">
-          <span>Raised</span>
-          <span>
+          <span className="font-inter">Raised</span>
+          <span className="font-inter">
             {campaign.amountCollected}/{campaign.target} ETH
           </span>
         </div>
@@ -165,7 +128,7 @@ const CampaignDetails = () => {
       </div>
 
       {/* Remaining Days */}
-      <p className="text-gray-500 text-xs sm:text-sm mt-1">
+      <p className="font-inter text-gray-500 text-xs sm:text-sm mt-1">
         {remainingDays} day{remainingDays !== 1 ? "s" : ""} left
       </p>
 
@@ -174,21 +137,25 @@ const CampaignDetails = () => {
         <input
           type="number"
           placeholder="ETH 0.1"
+          step={0.01}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="flex-1 px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          className="font-inter flex-1 px-2 w-full  sm:px-3 py-2 text-sm sm:text-base border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
         />
-        <CustomButton
-          title={isLoading ? "Processing..." : "Donate"}
+        <button
+          type="button"
           onClick={handleDonate}
           disabled={isLoading}
-          className="w-full sm:w-auto px-4 py-2 text-sm sm:text-base"
-        />
+          className={`w-full sm:w-auto px-4 sm:px-8 py-2 rounded-lg text-white font-medium font-poppins
+    ${isLoading ? "bg-gray-600" : "bg-black hover:bg-gray-800"}`}
+        >
+          {isLoading ? "Processing..." : "Donate"}
+        </button>
       </div>
 
       {/* Donators */}
       <div className="mt-6">
-        <h3 className="text-md sm:text-lg font-semibold mb-2">
+        <h3 className="font-inter text-md sm:text-lg font-semibold mb-2">
           Donators ({donators.length})
         </h3>
         {donators.length > 0 ? (
@@ -196,10 +163,12 @@ const CampaignDetails = () => {
             {donators.map((donator, index) => (
               <li
                 key={`${donator.donator}-${index}`}
-                className="flex justify-between text-sm sm:text-base bg-[#F9FAF7] px-3 py-2 rounded-md shadow-sm"
+                className="flex justify-between text-xs sm:text-base bg-[#F9FAF7] px-3 py-2 rounded-md shadow-sm"
               >
-                <span>{donator.donator.slice(0, 6)}…</span>
-                <span>{donator.donation} ETH</span>
+                <span className="font-inter text-xs">{donator.donator}</span>
+                <span className="font-inter font-bold">
+                  {donator.donation} ETH
+                </span>
               </li>
             ))}
           </ul>

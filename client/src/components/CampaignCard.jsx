@@ -11,7 +11,7 @@ const CampaignCard = ({ campaign }) => {
 
   return (
     <div
-      onClick={() => navigate(`/campaign-details/${campaign.projectId}`)}
+      onClick={() => navigate(`/campaign-details/${campaign.pId}`)}
       className="group cursor-pointer bg-[#F9FAF7] rounded-2xl overflow-hidden border border-black/5 hover:shadow-md transition"
     >
       {/* Image */}
