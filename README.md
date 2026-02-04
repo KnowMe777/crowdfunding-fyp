@@ -1,9 +1,8 @@
-# Crowdfunding FYP — Decentralized Crowdfunding Platform
+# upLift — A Decentralized Crowdfunding Platform
 
 A decentralized, Ethereum-compatible crowdfunding platform. Create campaigns, accept on-chain contributions, and display funding progress via a modern React frontend integrated with the Thirdweb SDK.
 
 - Live app: https://uplift-tau-pied.vercel.app
-- Repository: https://github.com/KnowMe777/crowdfunding-fyp
 
 ## Overview
 
