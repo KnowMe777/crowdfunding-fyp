@@ -28,7 +28,6 @@ const Campaigns = ({ campaigns, isLoading }) => {
         totalCount={campaigns.length}
       />
 
-      {/* Pagination */}
       {!isLoading && totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-12 mb-20">
           <button

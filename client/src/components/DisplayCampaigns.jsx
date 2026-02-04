@@ -19,7 +19,6 @@ const DisplayCampaigns = ({
 
   return (
     <section className="w-full px-4 sm:px-8 lg:px-16 mt-16 mb-10">
-      {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <h1 className="font-inter text-2xl sm:text-3xl font-bold text-black">
           {title}{" "}
@@ -29,7 +28,6 @@ const DisplayCampaigns = ({
         </h1>
       </div>
 
-      {/* Skeleton */}
       {isLoading && (
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: skeletonCount }).map((_, i) => (
@@ -38,12 +36,10 @@ const DisplayCampaigns = ({
         </div>
       )}
 
-      {/* Empty */}
       {!isLoading && campaigns.length === 0 && (
         <p className="font-inter text-gray-600">No campaigns found</p>
       )}
 
-      {/* Grid */}
       {!isLoading && campaigns.length > 0 && (
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {campaigns.map((campaign) => (
@@ -56,7 +52,6 @@ const DisplayCampaigns = ({
         </div>
       )}
 
-      {/* View All Button */}
       {showViewAll && (
         <button
           onClick={() => navigate("/campaigns")}

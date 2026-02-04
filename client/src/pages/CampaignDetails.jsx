@@ -76,7 +76,6 @@ const CampaignDetails = () => {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-16 py-6 flex flex-col gap-6">
-      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className="self-start px-1 py-1 rounded-lg text-gray-500 font-medium font-poppins bg-none text-3xl items-start"
@@ -84,14 +83,12 @@ const CampaignDetails = () => {
         <IoIosArrowBack />
       </button>
 
-      {/* Campaign Image */}
       <img
         src={campaign.image}
         alt={campaign.title}
         className="w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] object-cover rounded-xl border border-black/10 shadow-sm"
       />
 
-      {/* Title & Owner */}
       <div>
         <h1 className="font-inter text-xl sm:text-2xl md:text-3xl font-bold text-black">
           {campaign.title}
@@ -104,12 +101,10 @@ const CampaignDetails = () => {
         </p>
       </div>
 
-      {/* Description */}
       <p className="font-inter text-gray-600 text-sm sm:text-base">
         {campaign.description}
       </p>
 
-      {/* Progress / Target */}
       <div className="mt-3">
         <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-1">
           <span className="font-inter">Raised</span>
@@ -127,12 +122,10 @@ const CampaignDetails = () => {
         </div>
       </div>
 
-      {/* Remaining Days */}
       <p className="font-inter text-gray-500 text-xs sm:text-sm mt-1">
         {remainingDays} day{remainingDays !== 1 ? "s" : ""} left
       </p>
 
-      {/* Donate Section */}
       <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
         <input
           type="number"
@@ -153,7 +146,6 @@ const CampaignDetails = () => {
         </button>
       </div>
 
-      {/* Donators */}
       <div className="mt-6">
         <h3 className="font-inter text-md sm:text-lg font-semibold mb-2">
           Donators ({donators.length})

@@ -14,14 +14,12 @@ const CampaignCard = ({ campaign }) => {
       onClick={() => navigate(`/campaign-details/${campaign.pId}`)}
       className="group cursor-pointer bg-[#F9FAF7] rounded-2xl overflow-hidden border border-black/5 hover:shadow-md transition"
     >
-      {/* Image */}
       <img
         src={campaign.image}
         alt={campaign.title}
         className="w-full h-[140px] object-cover"
       />
 
-      {/* Content */}
       <div className="p-4">
         <h3 className="font-inter text-base font-semibold text-black truncate">
           {campaign.title}
@@ -31,7 +29,6 @@ const CampaignCard = ({ campaign }) => {
           {campaign.description}
         </p>
 
-        {/* Progress */}
         <div className="mt-3">
           <div className="flex justify-between text-xs text-gray-600 mb-1">
             <span>Raised</span>
@@ -48,7 +45,6 @@ const CampaignCard = ({ campaign }) => {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="mt-3 flex justify-between text-xs text-gray-500">
           <span>
             By{" "}
@@ -56,7 +52,7 @@ const CampaignCard = ({ campaign }) => {
               {campaign.owner.slice(0, 6)}…
             </span>
           </span>
-          <span>#{campaign.projectId}</span>
+          <span>#{campaign.pId}</span>
         </div>
       </div>
     </div>

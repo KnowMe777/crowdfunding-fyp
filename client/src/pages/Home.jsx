@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Hero, DisplayCampaigns } from "../components";
 import { useStateContext } from "../context";
-import { dummyCampaigns } from "../constants/DummyCampaigns";
+import { ImpactSection } from "../components";
+import { Footer } from "../components";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +29,8 @@ const Home = () => {
         campaigns={campaigns}
         showViewAll={true}
       />
+      <ImpactSection />
+      <Footer />
     </div>
   );
 };

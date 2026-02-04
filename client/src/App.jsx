@@ -7,8 +7,8 @@ import {
   Home,
   Profile,
   Campaigns,
+  HowItWorks,
 } from "./pages";
-import { dummyCampaigns } from "./constants/DummyCampaigns";
 import { useStateContext } from "./context";
 
 const App = () => {
@@ -27,27 +27,23 @@ const App = () => {
     if (contract) fetchCampaigns();
   }, [address, contract]);
 
-  // Example test with dummy campaigns
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   setCampaigns(dummyCampaigns);
-  //   setIsLoading(false);
-  // }, []);
-
   return (
-    <div className="relative min-h-screen pt-[64px] md:pt-[80px] pb-[64px] bg-white">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/create-campaign" element={<CreateCampaign />} />
-        <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-        <Route
-          path="/campaigns"
-          element={<Campaigns campaigns={campaigns} isLoading={isLoading} />}
-        />
-      </Routes>
+      <main className="flex-grow pt-[64px] md:pt-[80px]">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create-campaign" element={<CreateCampaign />} />
+          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route
+            path="/campaigns"
+            element={<Campaigns campaigns={campaigns} isLoading={isLoading} />}
+          />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+        </Routes>
+      </main>
     </div>
   );
 };

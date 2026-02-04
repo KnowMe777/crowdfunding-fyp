@@ -9,10 +9,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ================= DESKTOP TOP NAVBAR ================= */}
+      {/*DESKTOP TOP NAVBAR*/}
       <nav className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-[#9ACD32]">
         <div className="max-w-[1400px] mx-auto h-[80px] px-6 flex items-center justify-between w-full">
-          {/* Left section */}
           <div className="flex items-center gap-8">
             <Link className="font-montserrat text-2xl font-extrabold" to="/">
               upLift
@@ -25,7 +24,6 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Right section */}
           <div className="flex items-center gap-8">
             <NavLink
               to="/"
@@ -35,10 +33,10 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
-              to="/my-projects"
+              to="/profile"
               className="font-poppins font-medium text-black transition-transform duration-300 hover:scale-105"
             >
-              My projects
+              My Campaigns
             </NavLink>
 
             <NavLink
@@ -62,7 +60,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ================= MOBILE TOP BAR (LOGO + SEARCH) ================= */}
+      {/*MOBILE TOP BAR*/}
       <nav className="fixed top-0 left-0 w-full z-50 bg-[#9ACD32] md:hidden">
         <div className="h-[64px] px-4 flex items-center gap-16">
           <Link className="font-montserrat text-xl font-bold" to="/">
@@ -77,7 +75,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ================= MOBILE BOTTOM NAVBAR ================= */}
+      {/*MOBILE BOTTOM NAVBAR */}
       <nav className="fixed bottom-0 left-0 w-full h-[64px] bg-white border-t z-50 flex justify-around items-center md:hidden">
         <NavLink to="/" className="flex flex-col items-center text-xs">
           <Home size={22} />

@@ -54,7 +54,6 @@ const CreateCampaign = () => {
         </h1>
 
         <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-          {/* Name */}
           <div className="flex flex-col">
             <label className="mb-2 font-outfit font-medium">Your Name</label>
             <input
@@ -68,7 +67,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Campaign Title */}
           <div className="flex flex-col">
             <label className="mb-2 font-outfit font-medium">
               Campaign Title
@@ -84,7 +82,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Description */}
           <div className="flex flex-col">
             <label className="mb-2 font-outfit font-medium">Description</label>
             <textarea
@@ -98,7 +95,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Deadline & Target */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex flex-col flex-1">
               <label className="mb-2 font-outfit font-medium">Deadline</label>
@@ -129,7 +125,6 @@ const CreateCampaign = () => {
             </div>
           </div>
 
-          {/* Image URL */}
           <div className="flex flex-col">
             <label className="mb-2 font-outfit font-medium">
               Campaign Image URL
@@ -145,7 +140,6 @@ const CreateCampaign = () => {
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             className="mt-4 px-6 py-3 bg-black text-white font-poppins rounded-lg hover:opacity-90 transition duration-300"
